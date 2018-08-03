@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_777104_7vnjc23mpic.css">
   <title>smile</title>
 </head>
 
@@ -13,6 +14,9 @@
   <script>
     let htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
     let htmlDom = document.getElementsByTagName('html')[0];
+    if (htmlWidth > 750) {
+      htmlWidth = 750
+    }
     htmlDom.style.fontSize = htmlWidth / 20 + 'px';
 
   </script>
