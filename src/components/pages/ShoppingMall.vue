@@ -16,9 +16,18 @@
     <div class="swipe-area">
       <van-swipe :autoplay="1000">
         <van-swipe-item v-for="(banner,index) in bannerPicArray" :key="index">
-          <img v-lazy="banner.imageUrl" width="100%" alt="">
+          <img v-lazy="banner.image" width="100%" alt="">
         </van-swipe-item>
       </van-swipe>
+    </div>
+    <div class="type-bar">
+      <div v-for="(item,index) in category" :key="index">
+        <img width="100%" v-lazy="item.image" alt="">
+        <span>{{item.mallCategoryName}}</span>
+      </div>
+    </div>
+    <div class="">
+      <img width="100%" v-lazy="adBanner" alt="">
     </div>
   </div>
 </template>
@@ -29,20 +38,9 @@ export default {
   data() {
     return {
       msg: "Shopping Mall",
-      bannerPicArray: [
-        {
-          imageUrl:
-            "http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic001.jpg"
-        },
-        {
-          imageUrl:
-            "http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic002.jpg"
-        },
-        {
-          imageUrl:
-            "http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic003.jpg"
-        }
-      ]
+      bannerPicArray: [],
+      category: [],
+      adBanner: ""
     };
   },
   created() {
@@ -57,6 +55,9 @@ export default {
       })
         .then(res => {
           console.log(res);
+          this.category = res.data.data.category;
+          this.bannerPicArray = res.data.data.slides;
+          this.adBanner = res.data.data.advertesPicture.PICTURE_ADDRESS;
         })
         .catch(err => {
           console.log(err);
@@ -97,5 +98,18 @@ export default {
   clear: both;
   max-height: 10rem;
   overflow: hidden;
+}
+.type-bar {
+  margin: 0 0.3rem 0.3rem 0.3rem;
+  background-color: white;
+  border-radius: 0.3rem;
+  display: flex;
+  /* flex-direction: row; */
+  /* flex-wrap: nowrap; */
+  font-size: 16px;
+}
+.type-bar div {
+  padding: 0.3rem;
+  text-align: center;
 }
 </style>
