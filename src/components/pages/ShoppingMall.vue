@@ -67,32 +67,32 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .search-bar {
   overflow: hidden;
   height: 2.2rem;
   background-color: #e5017d;
-}
-.location {
-  width: 2rem;
-  height: 2.2rem;
-  line-height: 2.2rem;
-  margin-left: 0.5rem;
-  font-size: 1.8rem;
-  color: white;
-}
-.search-input {
-  width: 100%;
-  padding-top: 0.2rem;
-  height: 1.5rem;
-  background-color: transparent;
-  color: white;
-  border: 0;
-  border-bottom: 1px solid white;
-}
-.search-button {
-  line-height: 2rem;
-  padding-left: 0.8rem;
+  .location {
+    width: 2rem;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    margin-left: 0.5rem;
+    font-size: 1.8rem;
+    color: white;
+  }
+  .search-input {
+    width: 100%;
+    padding-top: 0.2rem;
+    height: 1.5rem;
+    background-color: transparent;
+    color: white;
+    border: 0;
+    border-bottom: 1px solid white;
+  }
+  .search-button {
+    line-height: 2rem;
+    padding-left: 0.8rem;
+  }
 }
 .swipe-area {
   clear: both;
@@ -107,9 +107,9 @@ export default {
   /* flex-direction: row; */
   /* flex-wrap: nowrap; */
   font-size: 16px;
-}
-.type-bar div {
-  padding: 0.3rem;
-  text-align: center;
+  div {
+    padding: 0.3rem;
+    text-align: center;
+  }
 }
 </style>
