@@ -29,19 +29,43 @@
     <div class="">
       <img width="100%" v-lazy="adBanner" alt="">
     </div>
+    <div class="recommend-area">
+      <div class="recommend-title">商品推荐</div>
+      <div class="recommend-body">
+        <swiper :options="swiperOptions">
+          <swiper-slide v-for="(item,index) in recommendGoods" :key="index">
+            <div class="recommend-item">
+              <img v-lazy="item.image" alt="" width="80%">
+              <div>{{item.goodsName}}</div>
+              <div>¥{{item.price}}(¥{{item.mallPrice}})</div>
+            </div>
+          </swiper-slide>
+        </swiper>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import "swiper/dist/css/swiper.css";
+import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
   data() {
     return {
       msg: "Shopping Mall",
       bannerPicArray: [],
       category: [],
-      adBanner: ""
+      adBanner: "",
+      recommendGoods: [],
+      swiperOptions: {
+        slidesPerView: 3
+      }
     };
+  },
+  components: {
+    swiper,
+    swiperSlide
   },
   created() {
     this.interfaceIndexDataFn();
@@ -58,6 +82,7 @@ export default {
           this.category = res.data.data.category;
           this.bannerPicArray = res.data.data.slides;
           this.adBanner = res.data.data.advertesPicture.PICTURE_ADDRESS;
+          this.recommendGoods = res.data.data.recommend;
         })
         .catch(err => {
           console.log(err);
@@ -110,6 +135,26 @@ export default {
   div {
     padding: 0.3rem;
     text-align: center;
+  }
+}
+.recommend-area {
+  background-color: white;
+  margin-top: 0.3rem;
+  .recommend-title {
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #e5017d;
+    padding: 0.2rem;
+  }
+  .recommend-body {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    .recommend-item {
+      width: 99%;
+      border-right: 1px solid #eee;
+      font-size: 12px;
+      text-align: center;
+    }
   }
 }
 </style>
