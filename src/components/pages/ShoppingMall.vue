@@ -43,6 +43,10 @@
         </swiper>
       </div>
     </div>
+    <swiperDefault></swiperDefault>
+    <swiperMultiple></swiperMultiple>
+    <swiperMultipleVertical></swiperMultipleVertical>
+    <swiperText></swiperText>
   </div>
 </template>
 
@@ -50,6 +54,10 @@
 import axios from "axios";
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
+import swiperDefault from "@/components/swiper/swiperDefault";
+import swiperMultiple from "@/components/swiper/swiperMultiple";
+import swiperMultipleVertical from "@/components/swiper/swiperMultipleVertical";
+import swiperText from "@/components/swiper/swiperText";
 export default {
   data() {
     return {
@@ -65,7 +73,11 @@ export default {
   },
   components: {
     swiper,
-    swiperSlide
+    swiperSlide,
+    swiperDefault,
+    swiperMultiple,
+    swiperMultipleVertical,
+    swiperText
   },
   created() {
     this.interfaceIndexDataFn();
