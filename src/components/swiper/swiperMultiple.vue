@@ -18,8 +18,10 @@ export default {
       slide: [1, 2, 3, 4, 5],
       swiperOptions: {
         pagination: {
-          el: ".swiper-pagination"
-        }
+          el: ".swiper-pagination",
+          clickable: true
+        },
+        loop: true
       }
     };
   },

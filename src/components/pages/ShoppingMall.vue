@@ -43,10 +43,10 @@
         </swiper>
       </div>
     </div>
-    <swiperDefault></swiperDefault>
+    <!-- <swiperDefault></swiperDefault>
     <swiperMultiple></swiperMultiple>
     <swiperMultipleVertical></swiperMultipleVertical>
-    <swiperText></swiperText>
+    <swiperText></swiperText> -->
   </div>
 </template>
 
