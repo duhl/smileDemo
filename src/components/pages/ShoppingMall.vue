@@ -6,41 +6,107 @@
           <span class="location iconfont icon-location"></span>
         </van-col>
         <van-col span="16">
-          <input type="text" class="search-input">
+          <input
+            type="text"
+            class="search-input"
+          >
         </van-col>
-        <van-col span="5" class="search-button">
+        <van-col
+          span="5"
+          class="search-button"
+        >
           <van-button size="mini">搜索</van-button>
         </van-col>
       </van-row>
     </div>
     <div class="swipe-area">
       <van-swipe :autoplay="1000">
-        <van-swipe-item v-for="(banner,index) in bannerPicArray" :key="index">
-          <img v-lazy="banner.image" width="100%" alt="">
+        <van-swipe-item
+          v-for="(banner,index) in bannerPicArray"
+          :key="index"
+        >
+          <img
+            v-lazy="banner.image"
+            width="100%"
+            alt=""
+          >
         </van-swipe-item>
       </van-swipe>
     </div>
     <div class="type-bar">
-      <div v-for="(item,index) in category" :key="index">
-        <img width="100%" v-lazy="item.image" alt="">
+      <div
+        v-for="(item,index) in category"
+        :key="index"
+      >
+        <img
+          width="100%"
+          v-lazy="item.image"
+          alt=""
+        >
         <span>{{item.mallCategoryName}}</span>
       </div>
     </div>
     <div class="">
-      <img width="100%" v-lazy="adBanner" alt="">
+      <img
+        width="100%"
+        v-lazy="adBanner"
+        alt=""
+      >
     </div>
     <div class="recommend-area">
       <div class="recommend-title">商品推荐</div>
       <div class="recommend-body">
         <swiper :options="swiperOptions">
-          <swiper-slide v-for="(item,index) in recommendGoods" :key="index">
+          <swiper-slide
+            v-for="(item,index) in recommendGoods"
+            :key="index"
+          >
             <div class="recommend-item">
-              <img v-lazy="item.image" alt="" width="80%">
+              <img
+                v-lazy="item.image"
+                alt=""
+                width="80%"
+              >
               <div>{{item.goodsName}}</div>
               <div>¥{{item.price}}(¥{{item.mallPrice}})</div>
             </div>
           </swiper-slide>
         </swiper>
+      </div>
+    </div>
+    <div class="floor">
+      <div class="floor-anomaly">
+        <div class="floor-one">
+          <img
+            :src="floor1_0.image"
+            alt=""
+          >
+        </div>
+        <div>
+          <div class="floor-two">
+            <img
+              :src="floor1_1.image"
+              alt=""
+            >
+          </div>
+          <div class="floor-three">
+            <img
+              :src="floor1_2.image"
+              alt=""
+            >
+          </div>
+        </div>
+      </div>
+      <div class="floor-rule">
+        <div
+          v-for="(item,index) in floor1.slice(3)"
+          :key="index"
+        >
+          <img
+            :src="item.image"
+            alt=""
+          >
+        </div>
       </div>
     </div>
     <!-- <swiperDefault></swiperDefault>
@@ -68,7 +134,11 @@ export default {
       recommendGoods: [],
       swiperOptions: {
         slidesPerView: 3
-      }
+      },
+      floor1: [],
+      floor1_0: {},
+      floor1_1: {},
+      floor1_2: {}
     };
   },
   components: {
@@ -95,6 +165,10 @@ export default {
           this.bannerPicArray = res.data.data.slides;
           this.adBanner = res.data.data.advertesPicture.PICTURE_ADDRESS;
           this.recommendGoods = res.data.data.recommend;
+          this.floor1 = res.data.data.floor1;
+          this.floor1_0 = this.floor1[0];
+          this.floor1_1 = this.floor1[1];
+          this.floor1_2 = this.floor1[2];
         })
         .catch(err => {
           console.log(err);
@@ -166,6 +240,42 @@ export default {
       border-right: 1px solid #eee;
       font-size: 12px;
       text-align: center;
+    }
+  }
+}
+.floor {
+  img {
+    width: 100%;
+  }
+  .floor-anomaly {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+
+    div {
+      width: 10rem;
+      box-sizing: border-box;
+    }
+    .floor-one {
+      border-right: 1px solid #ddd;
+    }
+    .floor-two {
+      border-bottom: 1px solid #ddd;
+    }
+  }
+  .floor-rule {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: white;
+    div {
+      width: 10rem;
+      box-sizing: border-box;
+      border-bottom: 1px solid #ddd;
+      &:nth-child(odd) {
+        border-right: 1px solid #ddd;
+      }
     }
   }
 }
