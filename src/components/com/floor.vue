@@ -1,5 +1,6 @@
 <template>
   <div class="floor">
+    <div class="title">{{floorTitle}}</div>
     <div class="floor-anomaly">
       <div class="floor-one">
         <img
@@ -44,6 +45,12 @@ export default {
       default: function() {
         return [];
       }
+    },
+    floorTitle: {
+      type: String,
+      default: function() {
+        return "";
+      }
     }
   },
   data() {
@@ -65,6 +72,13 @@ export default {
 
 <style lang="less" scoped>
 .floor {
+  .title {
+    text-align: center;
+    line-height: 1.8rem;
+    height: 1.8rem;
+    font-size: 14px;
+    font-weight: bold;
+  }
   img {
     width: 100%;
   }

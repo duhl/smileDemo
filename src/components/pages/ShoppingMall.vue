@@ -74,7 +74,18 @@
         </swiper>
       </div>
     </div>
-    <floor :floorData="floor1"></floor>
+    <floor
+      :floorData="floor1"
+      :floorTitle="floorName.floor1"
+    ></floor>
+    <floor
+      :floorData="floor2"
+      :floorTitle="floorName.floor2"
+    ></floor>
+    <floor
+      :floorData="floor3"
+      :floorTitle="floorName.floor3"
+    ></floor>
     <!-- <swiperDefault></swiperDefault>
     <swiperMultiple></swiperMultiple>
     <swiperMultipleVertical></swiperMultipleVertical>
@@ -103,9 +114,9 @@ export default {
         slidesPerView: 3
       },
       floor1: [],
-      floor1_0: {},
-      floor1_1: {},
-      floor1_2: {}
+      floor2: [],
+      floor3: [],
+      floorName: {}
     };
   },
   components: {
@@ -130,9 +141,9 @@ export default {
           this.adBanner = res.data.data.advertesPicture.PICTURE_ADDRESS;
           this.recommendGoods = res.data.data.recommend;
           this.floor1 = res.data.data.floor1;
-          this.floor1_0 = this.floor1[0];
-          this.floor1_1 = this.floor1[1];
-          this.floor1_2 = this.floor1[2];
+          this.floor2 = res.data.data.floor2;
+          this.floor3 = res.data.data.floor3;
+          this.floorName = res.data.data.floorName;
         })
         .catch(err => {
           console.log(err);
