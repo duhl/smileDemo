@@ -68,7 +68,7 @@
                 width="80%"
               >
               <div>{{item.goodsName}}</div>
-              <div>¥{{item.price}}(¥{{item.mallPrice}})</div>
+              <div>¥{{item.price|moneyFilter}}(¥{{item.mallPrice|moneyFilter}})</div>
             </div>
           </swiper-slide>
         </swiper>
@@ -102,6 +102,7 @@ import swiperMultiple from "@/components/swiper/swiperMultiple";
 import swiperMultipleVertical from "@/components/swiper/swiperMultipleVertical";
 import swiperText from "@/components/swiper/swiperText";
 import floor from "@/components/com/floor";
+import { toMoney } from "@/filter/moneyFilter.js";
 export default {
   data() {
     return {
@@ -123,6 +124,11 @@ export default {
     swiper,
     swiperSlide,
     floor
+  },
+  filters: {
+    moneyFilter(money) {
+      return toMoney(money);
+    }
   },
   created() {
     this.interfaceIndexDataFn();
