@@ -86,6 +86,28 @@
       :floorData="floor3"
       :floorTitle="floorName.floor3"
     ></floor>
+    <!--Hot Area-->
+    <div class="hot-area">
+      <div class="hot-title">热卖商品</div>
+      <div class="hot-goods">
+        <!--这里需要一个list组件-->
+        <van-list>
+          <van-row gutter="20">
+            <van-col
+              span="12"
+              v-for="(item,index) in hotGoods"
+              :key="index"
+            >
+              <goods-info
+                :goodsImage="item.image"
+                :goodsName="item.name"
+                :goodsPrice="item.price"
+              ></goods-info>
+            </van-col>
+          </van-row>
+        </van-list>
+      </div>
+    </div>
     <!-- <swiperDefault></swiperDefault>
     <swiperMultiple></swiperMultiple>
     <swiperMultipleVertical></swiperMultipleVertical>
@@ -102,6 +124,7 @@ import swiperMultiple from "@/components/swiper/swiperMultiple";
 import swiperMultipleVertical from "@/components/swiper/swiperMultipleVertical";
 import swiperText from "@/components/swiper/swiperText";
 import floor from "@/components/com/floor";
+import goodsInfo from "@/components/com/goodsInfo";
 import { toMoney } from "@/filter/moneyFilter.js";
 export default {
   data() {
@@ -117,13 +140,15 @@ export default {
       floor1: [],
       floor2: [],
       floor3: [],
-      floorName: {}
+      floorName: {},
+      hotGoods: []
     };
   },
   components: {
     swiper,
     swiperSlide,
-    floor
+    floor,
+    goodsInfo
   },
   filters: {
     moneyFilter(money) {
@@ -150,6 +175,7 @@ export default {
           this.floor2 = res.data.data.floor2;
           this.floor3 = res.data.data.floor3;
           this.floorName = res.data.data.floorName;
+          this.hotGoods = res.data.data.hotGoods;
         })
         .catch(err => {
           console.log(err);
@@ -223,5 +249,11 @@ export default {
       text-align: center;
     }
   }
+}
+.hot-area {
+  text-align: center;
+  font-size: 14px;
+  height: 1.8rem;
+  line-height: 1.8rem;
 }
 </style>
