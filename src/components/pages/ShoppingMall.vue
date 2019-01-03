@@ -74,41 +74,7 @@
         </swiper>
       </div>
     </div>
-    <div class="floor">
-      <div class="floor-anomaly">
-        <div class="floor-one">
-          <img
-            :src="floor1_0.image"
-            alt=""
-          >
-        </div>
-        <div>
-          <div class="floor-two">
-            <img
-              :src="floor1_1.image"
-              alt=""
-            >
-          </div>
-          <div class="floor-three">
-            <img
-              :src="floor1_2.image"
-              alt=""
-            >
-          </div>
-        </div>
-      </div>
-      <div class="floor-rule">
-        <div
-          v-for="(item,index) in floor1.slice(3)"
-          :key="index"
-        >
-          <img
-            :src="item.image"
-            alt=""
-          >
-        </div>
-      </div>
-    </div>
+    <floor :floorData="floor1"></floor>
     <!-- <swiperDefault></swiperDefault>
     <swiperMultiple></swiperMultiple>
     <swiperMultipleVertical></swiperMultipleVertical>
@@ -124,6 +90,7 @@ import swiperDefault from "@/components/swiper/swiperDefault";
 import swiperMultiple from "@/components/swiper/swiperMultiple";
 import swiperMultipleVertical from "@/components/swiper/swiperMultipleVertical";
 import swiperText from "@/components/swiper/swiperText";
+import floor from "@/components/com/floor";
 export default {
   data() {
     return {
@@ -144,10 +111,7 @@ export default {
   components: {
     swiper,
     swiperSlide,
-    swiperDefault,
-    swiperMultiple,
-    swiperMultipleVertical,
-    swiperText
+    floor
   },
   created() {
     this.interfaceIndexDataFn();
@@ -240,42 +204,6 @@ export default {
       border-right: 1px solid #eee;
       font-size: 12px;
       text-align: center;
-    }
-  }
-}
-.floor {
-  img {
-    width: 100%;
-  }
-  .floor-anomaly {
-    display: flex;
-    flex-direction: row;
-    background-color: white;
-    border-bottom: 1px solid #ddd;
-
-    div {
-      width: 10rem;
-      box-sizing: border-box;
-    }
-    .floor-one {
-      border-right: 1px solid #ddd;
-    }
-    .floor-two {
-      border-bottom: 1px solid #ddd;
-    }
-  }
-  .floor-rule {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    background-color: white;
-    div {
-      width: 10rem;
-      box-sizing: border-box;
-      border-bottom: 1px solid #ddd;
-      &:nth-child(odd) {
-        border-right: 1px solid #ddd;
-      }
     }
   }
 }
