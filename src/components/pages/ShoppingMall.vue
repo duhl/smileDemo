@@ -126,6 +126,7 @@ import swiperText from "@/components/swiper/swiperText";
 import floor from "@/components/com/floor";
 import goodsInfo from "@/components/com/goodsInfo";
 import { toMoney } from "@/filter/moneyFilter.js";
+import API from "@/serviceAPI.js";
 export default {
   data() {
     return {
@@ -161,8 +162,7 @@ export default {
   methods: {
     interfaceIndexDataFn() {
       axios({
-        url:
-          "https://www.easy-mock.com/mock/5b688452bb39fb125c791fc6/smile/index",
+        url: API.getShoppingMallInfo,
         method: "get"
       })
         .then(res => {
