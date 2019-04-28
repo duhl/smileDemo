@@ -12,12 +12,15 @@ const mongoose = require("mongoose")
     initSchemas();
     const User = mongoose.model("User");
     let oneUser = new User({
-        userName: "deon",
+        userName: "deon_3",
         password: "123456"
     });
     oneUser.save().then(() => {
         console.log("插入成功！（：")
-    })
+    });
+    let user = await User.findOne({});
+    console.log("------------------")
+    console.log("- ", user)
 })()
 
 app.use(async(ctx) => {
