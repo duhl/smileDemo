@@ -1,12 +1,27 @@
 const Koa = require("koa")
-const app = new Koa();
+const app = new Koa()
 const {
     connect,
     initSchemas
 } = require('./database/init.js')
 const mongoose = require("mongoose")
 
-;
+const Router = require("koa-router")
+
+let user = require("./appApi/user.js")
+let home = require("./appApi/home.js")
+
+// 装载所有子路由
+let router = new Router()
+router.use('/user', user.routes())
+router.use('/home', home.routes())
+
+// 加载路由中间件
+app.use(router.routes())
+app.use(router.allowedMethods())
+
+// 连接数据库
+/* ;
 (async() => {
     await connect();
     initSchemas();
@@ -21,7 +36,7 @@ const mongoose = require("mongoose")
     let user = await User.findOne({});
     console.log("------------------")
     console.log("- ", user)
-})()
+})() */
 
 app.use(async(ctx) => {
     ctx.body = "hello koas"
