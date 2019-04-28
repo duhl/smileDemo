@@ -1,5 +1,11 @@
 const mongoose = require('mongoose')
 const db = "mongodb://localhost/smile-db"
+const { resolve } = require("path")
+const glob = require("glob")
+
+exports.initSchemas = () => {
+    glob.sync(resolve(__dirname, './schema', '**/*.js')).forEach(require)
+}
 exports.connect = () => {
     //连接数据库
     mongoose.connect(db, { useNewUrlParser: true });
