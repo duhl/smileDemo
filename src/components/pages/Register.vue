@@ -8,12 +8,12 @@
     />
     <div class="register_panel">
       <van-field
-        v-model="username"
+        v-model="userName"
         label="用户名"
         icon="clear"
         placeholder="请输入用户名"
         required
-        @click-icon="username = ''"
+        @click-icon="userName = ''"
       />
       <van-field
         v-model="password"
@@ -24,7 +24,11 @@
       />
     </div>
     <div class="register_button">
-      <van-button type="primary" size="large" @click="registerUserFn"
+      <van-button
+        type="primary"
+        size="large"
+        @click="registerUserFn"
+        :loading="openLoading"
         >马上注册</van-button
       >
     </div>
@@ -38,8 +42,9 @@ import url from "@/serviceAPI.js";
 export default {
   data() {
     return {
-      username: "",
-      password: ""
+      userName: "",
+      password: "",
+      openLoading: false
     };
   },
   methods: {
@@ -47,11 +52,12 @@ export default {
       this.$router.go(-1);
     },
     registerUserFn() {
+      this.openLoading = true;
       axios({
         url: url.registerUser,
         method: "post",
         data: {
-          username: this.username,
+          userName: this.userName,
           password: this.password
         }
       })
@@ -59,11 +65,15 @@ export default {
           console.log("注册成功，返回", res);
           if (res.data.code == 0) {
             Toast.success(res.data.message);
+            this.$router.push("/");
           } else {
             Toast.fail("注册失败");
+            this.openLoading = false;
           }
         })
         .catch(err => {
+          Toast.fail("注册失败");
+          this.openLoading = false;
           console.log(err);
         });
     }
