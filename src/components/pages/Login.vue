@@ -69,21 +69,18 @@ export default {
         }
       })
         .then(res => {
-          console.log("登录成功，返回", res);
-          // return;
           if (res.data.code == 0) {
             Toast.success(res.data.message);
-            // this.$router.push("/");
+            res.data.isLogin && this.$router.push("/");
           } else {
             Toast.fail(res.data.message);
-            // Toast.fail("注册失败");
           }
           this.openLoading = false;
         })
         .catch(err => {
-          // Toast.fail("注册失败");
+          Toast.fail("登录失败");
+          console.log("登录失败", err);
           this.openLoading = false;
-          console.log(err);
         });
     },
     checkForm() {
