@@ -61,7 +61,7 @@ export default {
     loginUser() {
       this.openLoading = true;
       axios({
-        url: url.registerUser,
+        url: url.login,
         method: "post",
         data: {
           userName: this.userName,
@@ -69,14 +69,16 @@ export default {
         }
       })
         .then(res => {
-          console.log("注册成功，返回", res);
+          console.log("登录成功，返回", res);
+          // return;
           if (res.data.code == 0) {
             Toast.success(res.data.message);
             // this.$router.push("/");
           } else {
+            Toast.fail(res.data.message);
             // Toast.fail("注册失败");
-            this.openLoading = false;
           }
+          this.openLoading = false;
         })
         .catch(err => {
           // Toast.fail("注册失败");

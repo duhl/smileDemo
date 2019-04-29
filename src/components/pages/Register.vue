@@ -61,7 +61,7 @@ export default {
     registerUser() {
       this.openLoading = true;
       axios({
-        url: url.registerUser,
+        url: url.register,
         method: "post",
         data: {
           userName: this.userName,
