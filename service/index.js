@@ -5,8 +5,13 @@ const {
     initSchemas
 } = require('./database/init.js')
 const mongoose = require("mongoose")
-
+const bodyParser = require("koa-bodyparser")
+const cors = require("koa2-cors")
 const Router = require("koa-router")
+
+
+app.use(bodyParser())
+app.use(cors())
 
 let user = require("./appApi/user.js")
 let home = require("./appApi/home.js")

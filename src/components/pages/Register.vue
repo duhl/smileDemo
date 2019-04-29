@@ -24,12 +24,16 @@
       />
     </div>
     <div class="register_button">
-      <van-button type="primary" size="large">马上注册</van-button>
+      <van-button type="primary" size="large" @click="registerUserFn"
+        >马上注册</van-button
+      >
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import url from "@/serviceAPI.js";
 export default {
   data() {
     return {
@@ -40,6 +44,22 @@ export default {
   methods: {
     goBack() {
       this.$router.go(-1);
+    },
+    registerUserFn() {
+      axios({
+        url: url.registerUser,
+        method: "post",
+        data: {
+          username: this.username,
+          password: this.password
+        }
+      })
+        .then(res => {
+          console.log("注册成功，返回");
+        })
+        .catch(err => {
+          console.log("注册出错");
+        });
     }
   }
 };
