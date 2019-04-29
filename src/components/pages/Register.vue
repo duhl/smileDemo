@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { Toast } from "vant";
 import axios from "axios";
 import url from "@/serviceAPI.js";
 export default {
@@ -55,10 +56,15 @@ export default {
         }
       })
         .then(res => {
-          console.log("注册成功，返回");
+          console.log("注册成功，返回", res);
+          if (res.data.code == 0) {
+            Toast.success(res.data.message);
+          } else {
+            Toast.fail("注册失败");
+          }
         })
         .catch(err => {
-          console.log("注册出错");
+          console.log(err);
         });
     }
   }
