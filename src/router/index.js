@@ -1,18 +1,26 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import ShoppingMall from '@/components/pages/ShoppingMall'
-import Register from '@/components/pages/Register'
 
 Vue.use(Router)
 
 export default new Router({
+    mode: 'history',
     routes: [{
-        path: '/',
-        name: 'shoppingMall',
-        component: ShoppingMall
-    }, {
-        path: '/register',
-        name: 'register',
-        component: Register
-    }]
+            path: '/',
+            name: 'shoppingMall',
+            component: ShoppingMall
+        }, {
+            path: '/register',
+            name: 'register',
+            component: () =>
+                import ('@/components/pages/Register')
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: () =>
+                import ('@/components/pages/Login')
+        }
+    ]
 })
