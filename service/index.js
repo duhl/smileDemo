@@ -26,11 +26,11 @@ app.use(router.routes())
 app.use(router.allowedMethods())
 
 // 连接数据库
-/* ;
+;
 (async() => {
     await connect();
     initSchemas();
-    const User = mongoose.model("User");
+    /* const User = mongoose.model("User");
     let oneUser = new User({
         userName: "deon_3",
         password: "123456"
@@ -40,8 +40,8 @@ app.use(router.allowedMethods())
     });
     let user = await User.findOne({});
     console.log("------------------")
-    console.log("- ", user)
-})() */
+    console.log("- ", user) */
+})()
 
 app.use(async(ctx) => {
     ctx.body = "hello koas"
