@@ -14,6 +14,7 @@
         placeholder="请输入用户名"
         required
         @click-icon="userName = ''"
+        :error-message="userNameErrorMsg"
       />
       <van-field
         v-model="password"
@@ -21,13 +22,14 @@
         placeholder="请输入密码"
         required
         type="password"
+        :error-message="passwordErrorMsg"
       />
     </div>
     <div class="register_button">
       <van-button
         type="primary"
         size="large"
-        @click="registerUserFn"
+        @click="registerAction"
         :loading="openLoading"
         >马上注册</van-button
       >
@@ -44,14 +46,19 @@ export default {
     return {
       userName: "",
       password: "",
-      openLoading: false
+      openLoading: false,
+      userNameErrorMsg: "",
+      passwordErrorMsg: ""
     };
   },
   methods: {
     goBack() {
       this.$router.go(-1);
     },
-    registerUserFn() {
+    registerAction() {
+      this.checkForm() && this.registerUser();
+    },
+    registerUser() {
       this.openLoading = true;
       axios({
         url: url.registerUser,
@@ -76,6 +83,22 @@ export default {
           this.openLoading = false;
           console.log(err);
         });
+    },
+    checkForm() {
+      let isOk = true;
+      if (this.userName.length < 5) {
+        this.userNameErrorMsg = "用户名不能小于5位";
+        isOk = false;
+      } else {
+        this.userNameErrorMsg = "";
+      }
+      if (this.password.length < 6) {
+        this.passwordErrorMsg = "用户名不能小于5位";
+        isOk = false;
+      } else {
+        this.passwordErrorMsg = "";
+      }
+      return isOk;
     }
   }
 };

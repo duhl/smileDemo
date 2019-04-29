@@ -8,7 +8,7 @@ exports.initSchemas = () => {
 }
 exports.connect = () => {
     //连接数据库
-    mongoose.connect(db, { useNewUrlParser: true });
+    mongoose.connect(db, { useCreateIndex: true, useNewUrlParser: true });
     // return
     let maxConnectTimes = 0
     return new Promise((resolve, reject) => {
