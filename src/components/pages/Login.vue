@@ -51,6 +51,13 @@ export default {
       passwordErrorMsg: ""
     };
   },
+  created() {
+    console.log(localStorage.loginInfo);
+    if (JSON.parse(localStorage.loginInfo).userName) {
+      Toast.success("您已经登录过了");
+      this.$router.push("/");
+    }
+  },
   methods: {
     goBack() {
       this.$router.go(-1);
@@ -70,8 +77,20 @@ export default {
       })
         .then(res => {
           if (res.data.code == 0) {
-            Toast.success(res.data.message);
-            res.data.isLogin && this.$router.push("/");
+            new Promise((resolve, reject) => {
+              localStorage.setItem(
+                "loginInfo",
+                JSON.stringify({
+                  userName: this.userName
+                })
+              );
+              setTimeout(() => {
+                resolve();
+              }, 500);
+            }).then(() => {
+              Toast.success(res.data.message);
+              res.data.isLogin && this.$router.push("/");
+            });
           } else {
             Toast.fail(res.data.message);
           }
