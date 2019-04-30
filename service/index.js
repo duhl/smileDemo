@@ -46,7 +46,7 @@ app.use(router.allowedMethods())
 })()
 
 app.use(async(ctx) => {
-    ctx.body = "hello koas"
+    ctx.body = "hello koas,这不是个有效的接口，或许是您记错了？"
 })
 
 app.listen(3000, () => {
