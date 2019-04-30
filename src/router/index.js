@@ -21,6 +21,12 @@ export default new Router({
             name: 'login',
             component: () =>
                 import ('@/components/pages/Login')
+        },
+        {
+            path: '/goodsDetail',
+            name: 'login',
+            component: () =>
+                import ('@/components/pages/GoodsDetail')
         }
     ]
 })
