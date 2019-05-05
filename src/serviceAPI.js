@@ -4,6 +4,7 @@ const URL = {
     getShoppingMallInfo: HOSTNAME + "index", //商城首页所有信息
     register: LOCALURL + "user/register", //用户注册接口
     login: LOCALURL + "user/login", //用户登录接口
-    getDetailGoodsInfo: LOCALURL + "goods/getDetailGoodsInfo" //商品详情接口
+    getDetailGoodsInfo: LOCALURL + "goods/getDetailGoodsInfo", //商品详情接口
+    getCategoryList: LOCALURL + "goods/getCategoryList" //商品大类接口
 }
 module.exports = URL
