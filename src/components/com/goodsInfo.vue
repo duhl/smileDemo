@@ -1,23 +1,28 @@
 <template>
   <div class="goods-info">
-    <div class="goods-image">
-      <img
-        v-lazy="goodsImage"
-        width="90%"
-      />
+    <div class="goods-image" @click="toDetail">
+      <img v-lazy="goodsImage" width="90%" />
     </div>
-    <div class="goods-name">{{goodsName}}</div>
-    <div class="goods-price">￥{{goodsPrice | moneyFilter }}</div>
+    <div class="goods-name">{{ goodsName }}</div>
+    <div class="goods-price">￥{{ goodsPrice | moneyFilter }}</div>
   </div>
 </template>
 
 <script>
 import { toMoney } from "@/filter/moneyFilter.js";
 export default {
-  props: ["goodsImage", "goodsName", "goodsPrice"],
+  props: ["goodsImage", "goodsName", "goodsPrice", "goodsId"],
   filters: {
     moneyFilter(money) {
       return toMoney(money);
+    }
+  },
+  methods: {
+    toDetail() {
+      this.$router.push({
+        name: "GoodsDetail",
+        query: { goodsId: this.goodsId }
+      });
     }
   }
 };

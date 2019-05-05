@@ -8,23 +8,23 @@ export default new Router({
     mode: 'history',
     routes: [{
             path: '/',
-            name: 'shoppingMall',
+            name: 'ShoppingMall',
             component: ShoppingMall
         }, {
             path: '/register',
-            name: 'register',
+            name: 'Register',
             component: () =>
                 import ('@/components/pages/Register')
         },
         {
             path: '/login',
-            name: 'login',
+            name: 'Login',
             component: () =>
                 import ('@/components/pages/Login')
         },
         {
             path: '/goodsDetail',
-            name: 'login',
+            name: 'GoodsDetail',
             component: () =>
                 import ('@/components/pages/GoodsDetail')
         }

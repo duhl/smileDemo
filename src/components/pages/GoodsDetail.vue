@@ -14,6 +14,11 @@ export default {
       msg: ""
     };
   },
+  computed: {
+    goodsId() {
+      return this.$route.query.goodsId;
+    }
+  },
   created() {
     this.goodsDetailInfo();
   },
@@ -23,7 +28,7 @@ export default {
         url: url.getDetailGoodsInfo,
         method: "post",
         data: {
-          goodsId: "0032862950ca44d397e58a6fb10a3e38"
+          goodsId: this.goodsId
         }
       })
         .then(res => {

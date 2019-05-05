@@ -6,86 +6,50 @@
           <span class="location iconfont icon-location"></span>
         </van-col>
         <van-col span="16">
-          <input
-            type="text"
-            class="search-input"
-          >
+          <input type="text" class="search-input" />
         </van-col>
-        <van-col
-          span="5"
-          class="search-button"
-        >
+        <van-col span="5" class="search-button">
           <van-button size="mini">搜索</van-button>
         </van-col>
       </van-row>
     </div>
     <div class="swipe-area">
       <van-swipe :autoplay="1000">
-        <van-swipe-item
-          v-for="(banner,index) in bannerPicArray"
-          :key="index"
-        >
-          <img
-            v-lazy="banner.image"
-            width="100%"
-            alt=""
-          >
+        <van-swipe-item v-for="(banner, index) in bannerPicArray" :key="index">
+          <img v-lazy="banner.image" width="100%" alt="" />
         </van-swipe-item>
       </van-swipe>
     </div>
     <div class="type-bar">
-      <div
-        v-for="(item,index) in category"
-        :key="index"
-      >
-        <img
-          width="100%"
-          v-lazy="item.image"
-          alt=""
-        >
-        <span>{{item.mallCategoryName}}</span>
+      <div v-for="(item, index) in category" :key="index">
+        <img width="100%" v-lazy="item.image" alt="" />
+        <span>{{ item.mallCategoryName }}</span>
       </div>
     </div>
     <div class="">
-      <img
-        width="100%"
-        v-lazy="adBanner"
-        alt=""
-      >
+      <img width="100%" v-lazy="adBanner" alt="" />
     </div>
     <div class="recommend-area">
       <div class="recommend-title">商品推荐</div>
       <div class="recommend-body">
         <swiper :options="swiperOptions">
-          <swiper-slide
-            v-for="(item,index) in recommendGoods"
-            :key="index"
-          >
+          <swiper-slide v-for="(item, index) in recommendGoods" :key="index">
             <div class="recommend-item">
-              <img
-                v-lazy="item.image"
-                alt=""
-                width="80%"
-              >
-              <div>{{item.goodsName}}</div>
-              <div>¥{{item.price|moneyFilter}}(¥{{item.mallPrice|moneyFilter}})</div>
+              <img v-lazy="item.image" alt="" width="80%" />
+              <div>{{ item.goodsName }}</div>
+              <div>
+                ¥{{ item.price | moneyFilter }}(¥{{
+                  item.mallPrice | moneyFilter
+                }})
+              </div>
             </div>
           </swiper-slide>
         </swiper>
       </div>
     </div>
-    <floor
-      :floorData="floor1"
-      :floorTitle="floorName.floor1"
-    ></floor>
-    <floor
-      :floorData="floor2"
-      :floorTitle="floorName.floor2"
-    ></floor>
-    <floor
-      :floorData="floor3"
-      :floorTitle="floorName.floor3"
-    ></floor>
+    <floor :floorData="floor1" :floorTitle="floorName.floor1"></floor>
+    <floor :floorData="floor2" :floorTitle="floorName.floor2"></floor>
+    <floor :floorData="floor3" :floorTitle="floorName.floor3"></floor>
     <!--Hot Area-->
     <div class="hot-area">
       <div class="hot-title">热卖商品</div>
@@ -93,15 +57,12 @@
         <!--这里需要一个list组件-->
         <van-list>
           <van-row gutter="20">
-            <van-col
-              span="12"
-              v-for="(item,index) in hotGoods"
-              :key="index"
-            >
+            <van-col span="12" v-for="(item, index) in hotGoods" :key="index">
               <goods-info
                 :goodsImage="item.image"
                 :goodsName="item.name"
                 :goodsPrice="item.price"
+                :goodsId="item.goodsId"
               ></goods-info>
             </van-col>
           </van-row>
