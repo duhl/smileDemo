@@ -6,6 +6,7 @@ const URL = {
     login: LOCALURL + "user/login", //用户登录接口
     getDetailGoodsInfo: LOCALURL + "goods/getDetailGoodsInfo", //商品详情接口
     getCategoryList: LOCALURL + "goods/getCategoryList", //商品大类接口
-    getCategorySubList: LOCALURL + "goods/getCategorySubList" //商品小类接口
+    getCategorySubList: LOCALURL + "goods/getCategorySubList", //商品小类接口
+    getGoodsListByCategorySubId: LOCALURL + "goods/getGoodsListByCategorySubId" //根据小分类id查询列表
 }
 module.exports = URL

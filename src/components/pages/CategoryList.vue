@@ -27,6 +27,15 @@
               :title="item.MALL_SUB_NAME"
             ></van-tab>
           </van-tabs>
+          <div class="list">
+            <van-pull-refresh v-model="isRefresh" @refresh="onRefresh">
+              <van-list v-model="loading" :finished="finished" @load="onload">
+                <div class="item" v-for="(item, index) in list" :key="index">
+                  {{ item }}
+                </div>
+              </van-list>
+            </van-pull-refresh>
+          </div>
         </div>
       </van-col>
     </div>
@@ -43,7 +52,11 @@ export default {
       category: [],
       categoryIndex: 0,
       categorySub: [],
-      active: 0
+      active: 0,
+      loading: false,
+      finished: false, //上拉加载是否有数据,
+      list: [],
+      isRefresh: false
     };
   },
   created() {
@@ -52,6 +65,7 @@ export default {
   mounted() {
     const winHeight = document.documentElement.clientHeight;
     document.querySelector(".left").style.height = winHeight - 46 + "px";
+    document.querySelector(".list").style.height = winHeight - 90 + "px";
   },
   methods: {
     getCategoryListFn() {
@@ -97,6 +111,47 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    getGoodsListByCategorySubIdFn(item) {
+      axios({
+        url: url.getGoodsListByCategorySubId,
+        method: "post",
+        data: {
+          categorySubId: item.ID,
+          page: 1,
+          nums: 20
+        }
+      })
+        .then(res => {
+          console.log("根据小分类id获取到小分类列表数据", res);
+          if (res.data.code == 0 && res.data.data) {
+            this.categorySub = res.data.data;
+          } else {
+            Toast("服务器错误，列表数据获取失败");
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    onload() {
+      setTimeout(() => {
+        for (let i = 0; i < 10; i++) {
+          this.list.push(this.list.length + 1);
+        }
+        this.loading = false;
+        if (this.list.length >= 40) {
+          this.finished = true;
+        }
+      }, 500);
+    },
+    onRefresh() {
+      setTimeout(() => {
+        this.isRefresh = false;
+        this.finished = false;
+        this.list = [];
+        this.onload();
+      }, 500);
     }
   }
 };
@@ -118,6 +173,13 @@ export default {
     }
   }
   .right {
+    .list {
+      overflow: scroll;
+      .item {
+        text-align: center;
+        line-height: 5rem;
+      }
+    }
   }
 }
 </style>
