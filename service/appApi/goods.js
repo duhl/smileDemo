@@ -104,9 +104,10 @@ router.get('/getCategoryList', async(ctx) => {
 })
 
 // 获取商品小分类的接口
-router.get('/getCategorySubList', async(ctx) => {
+router.post('/getCategorySubList', async(ctx) => {
     try {
-        let categoryId = 1;
+        let categoryId = ctx.request.body.categoryId;
+        // let categoryId = 1;
         const CategorySub = mongoose.model('CategorySub');
         let result = await CategorySub.find({
             MALL_CATEGORY_ID: categoryId

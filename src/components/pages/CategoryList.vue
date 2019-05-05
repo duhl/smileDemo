@@ -10,7 +10,7 @@
             <li
               v-for="(item, index) in category"
               :key="index"
-              :class="[{ active: categoryIndex == index }]"
+              :class="{ active: categoryIndex == index }"
               @click="subListFn(item, index)"
             >
               {{ item.MALL_CATEGORY_NAME }}
@@ -19,7 +19,15 @@
         </div>
       </van-col>
       <van-col span="18">
-        <div class="right">右侧列表</div>
+        <div class="right">
+          <van-tabs v-model="active">
+            <van-tab
+              v-for="(item, index) in categorySub"
+              :key="index"
+              :title="item.MALL_SUB_NAME"
+            ></van-tab>
+          </van-tabs>
+        </div>
       </van-col>
     </div>
   </div>
@@ -33,7 +41,9 @@ export default {
   data() {
     return {
       category: [],
-      categoryIndex: null
+      categoryIndex: 0,
+      categorySub: [],
+      active: 0
     };
   },
   created() {
@@ -53,6 +63,7 @@ export default {
           console.log("获取到商品大类列表数据", res);
           if (res.data.code == 0 && res.data.data) {
             this.category = res.data.data;
+            this.getCategorySubListFn(this.category[0]);
           } else {
             Toast("服务器错误，商品大类列表数据获取失败");
           }
@@ -63,6 +74,29 @@ export default {
     },
     subListFn(item, index) {
       this.categoryIndex = index;
+      this.getCategorySubListFn(item);
+    },
+    getCategorySubListFn(item) {
+      this.categorySub = [];
+      this.active = 0;
+      axios({
+        url: url.getCategorySubList,
+        method: "post",
+        data: {
+          categoryId: item.ID
+        }
+      })
+        .then(res => {
+          console.log("根据大分类id获取到小分类列表数据", res);
+          if (res.data.code == 0 && res.data.data) {
+            this.categorySub = res.data.data;
+          } else {
+            Toast("服务器错误，商品小分类列表数据获取失败");
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
@@ -73,7 +107,6 @@ export default {
   .left {
     background-color: #f5fdff;
     ul {
-      padding: 10px 0;
       li {
         padding: 10px;
         line-height: 2rem;
@@ -83,6 +116,8 @@ export default {
         background-color: rgb(200, 242, 255);
       }
     }
+  }
+  .right {
   }
 }
 </style>
