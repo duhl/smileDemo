@@ -17,14 +17,19 @@
             <van-stepper v-model="item.count" />
           </span>
         </li>
-        <!-- <li class="text">{{ item.count }}</li> -->
-        <li class="price">{{ item.price }}</li>
+        <li class="price">
+          <span>￥{{ item.price | moneyFilter }}</span>
+          <span>x{{ item.count }}</span>
+          <span>￥{{ (item.count * item.price) | moneyFilter }}</span>
+        </li>
       </ul>
     </div>
+    <div class="bottom-bar">商品总价：￥{{ totalMeney | moneyFilter }}</div>
   </div>
 </template>
 
 <script>
+import { toMoney } from "@/filter/moneyFilter";
 export default {
   data() {
     return {
@@ -39,6 +44,21 @@ export default {
         console.log("购物车数据有变化了？", val);
       },
       deep: true
+    }
+  },
+  computed: {
+    totalMeney() {
+      let meney = 0;
+      this.cartData.forEach(item => {
+        meney += item.price * item.count;
+      });
+      localStorage.cartData = JSON.stringify(this.cartData);
+      return meney;
+    }
+  },
+  filters: {
+    moneyFilter(money) {
+      return toMoney(money);
     }
   },
   created() {
@@ -96,8 +116,28 @@ export default {
         padding-left: 10px;
         flex: 4;
         text-align: right;
+        span {
+          display: block;
+          margin-bottom: 10px;
+        }
+        span:last-child {
+          color: red;
+        }
       }
     }
+  }
+  .bottom-bar {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    border-top: 1px solid #ededed;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    text-align: right;
+    color: red;
+    font-size: 0.8rem;
   }
 }
 </style>
