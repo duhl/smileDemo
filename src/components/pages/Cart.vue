@@ -33,6 +33,14 @@ export default {
       isEmpty: false
     };
   },
+  watch: {
+    cartData: {
+      handler: function(val) {
+        console.log("购物车数据有变化了？", val);
+      },
+      deep: true
+    }
+  },
   created() {
     this.getCarData();
   },
