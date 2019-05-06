@@ -35,7 +35,7 @@
                   v-for="(item, index) in goodsList"
                   :key="index"
                 >
-                  <li><img :src="item.IMAGE1" alt="" /></li>
+                  <li><img :src="item.IMAGE1" :onerror="errorImg" alt="" /></li>
                   <li>{{ item.NAME }}</li>
                   <li>{{ item.ORI_PRICE }}</li>
                 </ul>
@@ -64,7 +64,8 @@ export default {
       goodsList: [],
       page: 1,
       categorySubId: "", //商品子类id
-      isRefresh: false
+      isRefresh: false,
+      errorImg: 'this.src="' + require("@/assets/errorimg.png") + '"'
     };
   },
   created() {
@@ -208,10 +209,23 @@ export default {
     .list {
       overflow: scroll;
       .item {
+        padding: 10px 5px;
+        width: 100%;
+        float: left;
         // line-height: 5rem;
-        border: 1px solid #dddddd;
+        font-size: 0.8rem;
+        border: 1px solid #f1f1f1;
         img {
           width: 100%;
+        }
+        li {
+          width: 70%;
+          //   display: inline-block;
+          float: right;
+        }
+        li:first-child {
+          width: 28%;
+          float: left;
         }
       }
     }

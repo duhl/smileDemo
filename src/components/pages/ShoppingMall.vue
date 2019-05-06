@@ -189,6 +189,7 @@ export default {
   div {
     padding: 0.3rem;
     text-align: center;
+    flex: 1;
   }
 }
 .recommend-area {
