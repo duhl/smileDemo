@@ -34,10 +34,12 @@
                   class="item"
                   v-for="(item, index) in goodsList"
                   :key="index"
+                  @click="toDetail(item)"
                 >
                   <li><img :src="item.IMAGE1" :onerror="errorImg" alt="" /></li>
                   <li>{{ item.NAME }}</li>
-                  <li>{{ item.ORI_PRICE }}</li>
+                  <!-- <li>{{ item.ORI_PRICE }}</li> -->
+                  <li>￥{{ item.PRESENT_PRICE | moneyFilter }}元</li>
                 </ul>
               </van-list>
             </van-pull-refresh>
@@ -52,6 +54,7 @@
 import { Toast } from "vant";
 import axios from "axios";
 import url from "@/serviceAPI.js";
+import { toMoney } from "@/filter/moneyFilter";
 export default {
   data() {
     return {
@@ -67,6 +70,11 @@ export default {
       isRefresh: false,
       errorImg: 'this.src="' + require("@/assets/errorimg.png") + '"'
     };
+  },
+  filters: {
+    moneyFilter(money) {
+      return toMoney(money);
+    }
   },
   created() {
     this.getCategoryListFn();
@@ -184,6 +192,12 @@ export default {
         this.page = 1;
         this.onload();
       }, 500);
+    },
+    toDetail(item) {
+      this.$router.push({
+        name: "GoodsDetail",
+        params: { goodsId: item.ID }
+      });
     }
   }
 };
@@ -226,6 +240,10 @@ export default {
         li:first-child {
           width: 28%;
           float: left;
+        }
+        li:last-child {
+          margin-top: 5px;
+          color: rgb(199, 26, 26);
         }
       }
     }

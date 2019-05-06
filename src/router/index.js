@@ -33,6 +33,12 @@ export default new Router({
             name: 'CategoryList',
             component: () =>
                 import ('@/components/pages/CategoryList')
+        },
+        {
+            path: '/cart',
+            name: 'Cart',
+            component: () =>
+                import ('@/components/pages/Cart')
         }
     ]
 })

@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     goodsId() {
-      return this.$route.query.goodsId;
+      return this.$route.query.goodsId || this.$route.params.goodsId;
     }
   },
   filters: {
@@ -56,6 +56,7 @@ export default {
     }
   },
   created() {
+    console.log("009", this.$route);
     this.goodsDetailInfo();
   },
   methods: {
