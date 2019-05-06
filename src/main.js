@@ -15,9 +15,10 @@ import {
     Field,
     Tab,
     Tabs,
-    PullRefresh
+    PullRefresh,
+    Stepper
 } from 'vant'
-Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload).use(List).use(NavBar).use(Field).use(Tab).use(Tabs).use(PullRefresh)
+Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload).use(List).use(NavBar).use(Field).use(Tab).use(Tabs).use(PullRefresh).use(Stepper)
 
 Vue.config.productionTip = false
 
