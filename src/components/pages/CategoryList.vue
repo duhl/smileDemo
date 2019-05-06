@@ -20,7 +20,7 @@
       </van-col>
       <van-col span="18">
         <div class="right">
-          <van-tabs v-model="active">
+          <van-tabs v-model="active" @click="onClickCategorySub">
             <van-tab
               v-for="(item, index) in categorySub"
               :key="index"
@@ -30,9 +30,15 @@
           <div class="list">
             <van-pull-refresh v-model="isRefresh" @refresh="onRefresh">
               <van-list v-model="loading" :finished="finished" @load="onload">
-                <div class="item" v-for="(item, index) in list" :key="index">
-                  {{ item }}
-                </div>
+                <ul
+                  class="item"
+                  v-for="(item, index) in goodsList"
+                  :key="index"
+                >
+                  <li><img :src="item.IMAGE1" alt="" /></li>
+                  <li>{{ item.NAME }}</li>
+                  <li>{{ item.ORI_PRICE }}</li>
+                </ul>
               </van-list>
             </van-pull-refresh>
           </div>
@@ -55,7 +61,9 @@ export default {
       active: 0,
       loading: false,
       finished: false, //上拉加载是否有数据,
-      list: [],
+      goodsList: [],
+      page: 1,
+      categorySubId: "", //商品子类id
       isRefresh: false
     };
   },
@@ -89,6 +97,9 @@ export default {
     subListFn(item, index) {
       this.categoryIndex = index;
       this.getCategorySubListFn(item);
+      this.page = 1;
+      this.finished = false;
+      this.goodsList = [];
     },
     getCategorySubListFn(item) {
       this.categorySub = [];
@@ -104,6 +115,9 @@ export default {
           console.log("根据大分类id获取到小分类列表数据", res);
           if (res.data.code == 0 && res.data.data) {
             this.categorySub = res.data.data;
+            this.active = 0;
+            this.categorySubId = this.categorySub[0].ID;
+            this.onload();
           } else {
             Toast("服务器错误，商品小分类列表数据获取失败");
           }
@@ -112,44 +126,61 @@ export default {
           console.log(err);
         });
     },
-    getGoodsListByCategorySubIdFn(item) {
+    getGoodsListFn() {
       axios({
         url: url.getGoodsListByCategorySubId,
         method: "post",
         data: {
-          categorySubId: item.ID,
-          page: 1,
+          categorySubId: this.categorySubId,
+          page: this.page,
           nums: 20
         }
       })
         .then(res => {
-          console.log("根据小分类id获取到小分类列表数据", res);
-          if (res.data.code == 0 && res.data.data) {
-            this.categorySub = res.data.data;
+          console.log("根据小分类id获取到列表数据", res);
+          if (res.data.code == 0 && res.data.data.length) {
+            // this.categorySub = res.data.data;
+            this.page++;
+            this.goodsList = this.goodsList.concat(res.data.data);
           } else {
-            Toast("服务器错误，列表数据获取失败");
+            this.finished = true;
+            // Toast("服务器错误，列表数据获取失败");
           }
+          this.loading = false;
         })
         .catch(err => {
           console.log(err);
         });
     },
+    onClickCategorySub(index, title) {
+      console.log(index, title);
+      this.page = 1;
+      this.categorySubId = this.categorySub[index].ID;
+      this.goodsList = [];
+      this.finished = false;
+      this.onload();
+    },
     onload() {
       setTimeout(() => {
-        for (let i = 0; i < 10; i++) {
+        /* for (let i = 0; i < 10; i++) {
           this.list.push(this.list.length + 1);
         }
         this.loading = false;
         if (this.list.length >= 40) {
           this.finished = true;
-        }
-      }, 500);
+        } */
+        this.categorySubId = this.categorySubId
+          ? this.categorySubId
+          : this.categorySub[0].ID;
+        this.getGoodsListFn();
+      }, 1000);
     },
     onRefresh() {
       setTimeout(() => {
         this.isRefresh = false;
         this.finished = false;
-        this.list = [];
+        this.goodsList = [];
+        this.page = 1;
         this.onload();
       }, 500);
     }
@@ -173,11 +204,15 @@ export default {
     }
   }
   .right {
+    background-color: white;
     .list {
       overflow: scroll;
       .item {
-        text-align: center;
-        line-height: 5rem;
+        // line-height: 5rem;
+        border: 1px solid #dddddd;
+        img {
+          width: 100%;
+        }
       }
     }
   }
