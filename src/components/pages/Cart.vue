@@ -127,13 +127,14 @@ export default {
     }
   }
   .bottom-bar {
+    box-sizing: border-box;
+    padding: 0.5rem;
     width: 100%;
-    height: 50px;
-    line-height: 50px;
+    line-height: 30px;
     border-top: 1px solid #ededed;
-    position: fixed;
-    left: 0;
-    bottom: 0;
+    // position: fixed;
+    // left: 0;
+    // bottom: 0;
     background-color: white;
     text-align: right;
     color: red;
