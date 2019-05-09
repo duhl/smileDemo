@@ -1,6 +1,8 @@
 <template>
   <div>
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
     <div>
       <van-tabbar v-model="active" @change="changeFn(active)">
         <van-tabbar-item>首页</van-tabbar-item>
@@ -16,8 +18,15 @@
 export default {
   data() {
     return {
-      active: 0
+      active: 0,
+      nowPath: ""
     };
+  },
+  created() {
+    this.changeTabber();
+  },
+  updated() {
+    this.changeTabber();
   },
   methods: {
     changeFn(active) {
@@ -35,6 +44,14 @@ export default {
         case 3:
           break;
         default:
+          break;
+      }
+    },
+    changeTabber() {
+      this.nowPath = this.$route.path;
+      switch (this.nowPath) {
+        case "/cart":
+          this.active = 2;
           break;
       }
     }

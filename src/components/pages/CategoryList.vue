@@ -81,8 +81,8 @@ export default {
   },
   mounted() {
     const winHeight = document.documentElement.clientHeight;
-    document.querySelector(".left").style.height = winHeight - 46 + "px";
-    document.querySelector(".list").style.height = winHeight - 90 + "px";
+    document.querySelector(".left").style.height = winHeight - 46 - 50 + "px";
+    document.querySelector(".list").style.height = winHeight - 90 - 50 + "px";
   },
   methods: {
     getCategoryListFn() {
