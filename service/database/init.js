@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-const db = "mongodb://0.0.0.0:50587/smile-db"
-    // const db = "mongodb://localhost/smile-db"
+    // const db = "mongodb://0.0.0.0:50587/smile-db"
+const db = "mongodb://localhost/smile-db"
 const { resolve } = require("path")
 const glob = require("glob")
 
