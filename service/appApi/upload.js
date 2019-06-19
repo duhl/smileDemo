@@ -8,6 +8,11 @@ router.get("/", async(ctx) => {
 })
 
 router.post("/upload", async(ctx) => {
+    console.log(ctx.request.files);
+    console.log(ctx.request.body);
+    ctx.body = JSON.stringify(ctx.request.files);
+    return
+
     const GoodsNew = mongoose.model("GoodsNew")
     let newGoodsNew = new GoodsNew(ctx.request.body)
 
