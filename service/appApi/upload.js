@@ -8,13 +8,13 @@ router.get("/", async(ctx) => {
 })
 
 router.post("/upload", async(ctx) => {
-    const User = mongoose.model("User")
-    let newUser = new User(ctx.request.body)
+    const GoodsNew = mongoose.model("GoodsNew")
+    let newGoodsNew = new GoodsNew(ctx.request.body)
 
-    await newUser.save().then(res => {
+    await newGoodsNew.save().then(res => {
         ctx.body = {
             code: 0,
-            message: "注册成功"
+            message: "上传成功"
         }
     }).catch(err => {
         ctx.body = {
