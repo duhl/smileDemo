@@ -1,5 +1,5 @@
 const HOSTNAME = "https://www.easy-mock.com/mock/5b688452bb39fb125c791fc6/smile/";
-const LOCALURL = "http://localhost:3000/"
+const LOCALURL = "http://47.104.190.78:3000/"
 const URL = {
     getShoppingMallInfo: HOSTNAME + "index", //商城首页所有信息
     register: LOCALURL + "user/register", //用户注册接口
