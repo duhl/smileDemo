@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>上传图片</h2>
+    <h2>upload</h2>
   </div>
 </template>
 
