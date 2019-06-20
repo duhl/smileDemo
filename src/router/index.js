@@ -47,7 +47,11 @@ export default new Router({
             component: () =>
                 import ('@/components/pages/GoodsDetail')
         },
-
-
+        {
+            path: '/upload',
+            name: 'upload',
+            component: () =>
+                import ('@/components/pages/Upload')
+        }
     ]
 })
