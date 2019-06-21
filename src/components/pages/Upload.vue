@@ -3,16 +3,25 @@
     <h2>upload</h2>
     <el-upload
       class="upload-demo"
-      action="http://127.0.0.1:3000/upload/upload"
+      ref="upload"
+      :action="url.upload"
       :on-preview="handlePreview"
       :on-remove="handleRemove"
       :before-remove="beforeRemove"
       multiple
-      :limit="3"
+      :limit="10"
       :on-exceed="handleExceed"
       :file-list="fileList"
+      :auto-upload="false"
     >
-      <el-button size="small" type="primary">点击上传</el-button>
+      <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+      <el-button
+        style="margin-left: 10px;"
+        size="small"
+        type="success"
+        @click="submitUpload"
+        >上传到服务器</el-button
+      >
       <div slot="tip" class="el-upload__tip">
         只能上传jpg/png文件，且不超过500kb
       </div>
@@ -28,7 +37,8 @@ export default {
   data() {
     return {
       openLoading: false,
-      fileList: []
+      fileList: [],
+      url: url
     };
   },
   methods: {
@@ -58,6 +68,9 @@ export default {
           this.openLoading = false;
           console.log(err);
         });
+    },
+    submitUpload() {
+      this.$refs.upload.submit();
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
