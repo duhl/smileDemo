@@ -21,12 +21,16 @@ router.post("/upload",
     }
 } */
     async(ctx) => {
-        console.log(ctx);
-        console.log(ctx.request.files);
-        console.log(ctx.request.body);
+        // console.log("0", ctx);
+        // console.log("1", ctx.request);
+        console.log("2", ctx.request.files.file);
+        let fileObj = ctx.request.files.file;
+        console.log("2-1", fileObj.path);
+        // console.log("2-2",ctx.request.files.file.File.size);
+        console.log("3", ctx.request.body);
         // ctx.body = JSON.stringify(ctx.request.files);
         ctx.body = {
-            code: 0,
+            code: "0",
             message: "上传成功"
         }
         return
