@@ -1,12 +1,21 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
+let ObjectId = Schema.Types.ObjectId;
 const goodsSchema = new Schema({
-    ID: { unique: true, type: String },
+    // _id: String,
+    title: String,
+    intro: String,
+    path: String,
+    size: Number,
+    createAt: {
+        type: Date,
+        default: Date.now()
+    },
+    /* ID: { unique: true, type: String },
     SHOP_ID: String,
     SHOP_IMAGE: String,
     SHOP_INTRO: String,
-    PRICE: Number,
+    PRICE: Number, */
     /* GOODS_SERIAL_NUMBER: String,
     SHOP_ID: String,
     SUB_ID: String,

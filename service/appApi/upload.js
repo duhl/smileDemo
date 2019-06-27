@@ -24,19 +24,25 @@ router.post("/upload",
         // console.log("0", ctx);
         // console.log("1", ctx.request);
         console.log("2", ctx.request.files.file);
-        let fileObj = ctx.request.files.file;
-        console.log("2-1", fileObj.path);
+        let fileObj = ctx.request.body;
+        let fileInfo = ctx.request.files.file;
+        console.log("2-1", fileInfo.path);
+        console.log("2-2", fileInfo.path.split('\\'));
+        console.log("2-3", fileInfo.path.split('\\').pop());
+        fileObj.path = fileInfo.path.split('\\').pop();
+        fileObj.size = fileInfo.size;
+        // fileObj._id = "1234";
         // console.log("2-2",ctx.request.files.file.File.size);
-        console.log("3", ctx.request.body);
+        console.log("3", fileObj);
         // ctx.body = JSON.stringify(ctx.request.files);
-        ctx.body = {
+        /* ctx.body = {
             code: "0",
             message: "上传成功"
         }
-        return
+        return */
 
         const GoodsNew = mongoose.model("GoodsNew")
-        let newGoodsNew = new GoodsNew(ctx.request.body)
+        let newGoodsNew = new GoodsNew(fileObj)
 
         await newGoodsNew.save().then(res => {
             ctx.body = {

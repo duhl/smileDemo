@@ -124,8 +124,11 @@ export default {
       formData.append("title", this.title);
       formData.append("intro", this.intro);
       //   url.upload
-      axios
-        .post(url.upload, formData)
+      axios({
+        method: "post",
+        url: url.upload,
+        data: formData
+      })
         .then(response => {
           console.log("上传图片成功");
           param.onSuccess(); // 上传成功的图片会显示绿色的对勾
