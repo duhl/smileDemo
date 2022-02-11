@@ -11,7 +11,7 @@
         "m-start": "webpack-dev-server --port 3000 --hot --host 0.0.0.0"
     },
     "dependencies": {
-        "ajv": "^6.10.0",
+        "ajv": "^6.12.3",
         "axios": "^0.18.0",
         "vant": "^2.0.1",
         "element-ui": "^2.9.1",
